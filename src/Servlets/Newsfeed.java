@@ -11,9 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mysql.fabric.xmlrpc.base.Data;
 
+import customTools.DbPosts;
 import model.Bhpost;
 
 /**
@@ -47,7 +49,39 @@ public class Newsfeed extends HttpServlet {
 //		p.setPostdate(date);
 //		p.setPosttext("This is the text of my post");
 //		posts.add(p);
+		long filterByUserID = 0; 
+		String searchtext = "";
 		
+		String nextURL = "/error.jsp";
+		//get user out of session. If they don't exist then send them back to the login page.
+		//kill the session while you're at it.
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user")==null){
+			//http://stackoverflow.com/questions/13638446/checking-servlet-session-attribute-value-in-jsp-file
+			nextURL = "/login.jsp";
+			session.invalidate();
+			response.sendRedirect(request.getContextPath() + nextURL);
+		    return;//return prevents an error
+		}
+		
+		//get posts based on parameters; if no parameters then get all posts
+		List<Bhpost> posts = null;
+		if (request.getParameter("userid")!=null){
+			filterByUserID = Integer.parseInt(request.getParameter("userid"));
+			posts = DbPosts.postsofUser(filterByUserID);
+		}else if (request.getParameter("searchtext")!=null){
+			searchtext = request.getParameter("searchtext").toString();
+			posts = DbPosts.searchPosts(searchtext);
+		}else{
+			posts = DbPosts.bhPost();
+		}
+		
+		//add posts to session
+		session.setAttribute("posts", posts);
+		//display posts in newsfeed.jsp
+		nextURL = "/newsfeed.jsp";
+		//redirect to next page as indicated by the value of the nextURL variable
+		getServletContext().getRequestDispatcher(nextURL).forward(request,response);
 	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

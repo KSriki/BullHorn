@@ -19,20 +19,7 @@
 <h1>${message}</h1>
 <h1>Welcome, ${user.getUsername()}</h1>
 <h2>${user.getMotto()}</h2>
-<table class="table table-bordered">
-    <thead>
-        <tr><th>User</th><th>Post</th><th>Date</th></tr>
-    </thead>
-    <tbody>
-    <c:forEach var="post" items="${posts}">
-        <tr><td><a href="ProfileServlet?action=viewprofile&userid=<c:out value="${post.bhuser.bhuserid}"/>"><c:out value="${post.bhuser.useremail}"/></a></td>
-        <td><c:out value="${post.posttext}"/></td>
-        <td><fmt:formatDate value="${post.postdate}" pattern="yy-MMM-dd"/></td>
-        </tr>
-    </c:forEach>
-    </tbody>
-    </table>
-    
+
 <form role="form" action="PostServ" method="post" onsubmit="return validate(this);">
     <div class="form-group">  
        <label for="post">Create New Post (141 char):</label> <br />
