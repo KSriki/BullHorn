@@ -10,7 +10,7 @@
  *    The difference between edit and update: after making changes to the form
  *    from edit profile, they would click update to save the changes
  */
-
+package Servlets;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 import customTools.DbUser;
 import model.Bhuser;
 
-
+@WebServlet("/ProfileServlet")
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -123,6 +123,6 @@ public class ProfileServlet extends HttpServlet {
 
 		nextURL = "/profile.jsp";
 		//redirect to next page as indicated by the value of the nextURL variable
-
+		getServletContext().getRequestDispatcher(nextURL).forward(request,response);
 	}
 }

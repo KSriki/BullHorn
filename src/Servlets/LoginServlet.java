@@ -1,13 +1,19 @@
-
+package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import customTools.DbPosts;
 import customTools.DbUser;
+import model.Bhpost;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -31,13 +37,27 @@ public class LoginServlet extends HttpServlet {
 		String message = "";
 		HttpSession session = request.getSession();
 		
+		List<Bhpost> posts = null;
+		
+		
 		//did they click the logout link?
 		//first... check that the action variable contains something
 		//then the code below will determine if they clicked logout and kill the session
 		//before sending the user back to the login page
-		
+		if(!action.isEmpty()||!(action==null)){
+		    if (request.getParameter("action").toString().equals("logout")){
+		        //Go back to login.jsp. 
+		        nextPage = "/login.jsp";
+		        response.sendRedirect(request.getContextPath() + nextPage);
+		        return;//return here exits the method and prevents an error
+		    }else{
+		        nextPage = "/home.jsp";
+		    }
+		}
 
-			
+		posts = DbPosts.bhPost();
+		session.setAttribute("posts",posts);
+		
 		//putting a blank message just ensures I have a blank message.Since the message is set in the session
 		//it could still exist as the user navigates between pages so at the top of each page I should endure
 		//the message attribute contains nothing. Alternatively, I could just remove it if it exists.

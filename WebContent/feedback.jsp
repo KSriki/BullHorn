@@ -9,7 +9,13 @@
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
 <h1>this is the feedback page</h1>
-
+<form action="" method="post">
+  <input type="radio" name="subject" value="Question" checked> Question<br>
+  <input type="radio" name="subject" value="Complaint"> Complaint<br>
+  <input type="radio" name="subject" value="Comment"> Comment<br><br>
+  <textarea name="feedback" rows="6" cols="50"></textarea><br><br>
+  <input type="submit" value="Send Feedback">
+</form>
 
 </body>
 </html>

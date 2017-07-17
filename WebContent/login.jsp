@@ -10,8 +10,8 @@
 <h1>Login Page</h1>
 
 <form action="LoginServlet" method="post">
-	Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="email" value="bart@fox.net"><br/>
-	Password:&nbsp;<input type="password" name="password" value="1234"><br/>
+	Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="email" value="larry12345@gmail.com"><br/>
+	Password:&nbsp;<input type="password" name="password" value="password"><br/>
 	<input type="hidden" name="action" value="login">
 	<input type="submit" value="Log In">
 </form>
