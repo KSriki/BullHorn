@@ -34,6 +34,7 @@ public class DbUser {
 		try {
 			trans.begin();
 			em.persist(bhUser);
+			em.flush();
 			//System.out.println("DbBullhorn: commit transaction");
 			trans.commit();
 		} catch (Exception e) {

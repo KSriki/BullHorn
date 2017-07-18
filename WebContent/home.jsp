@@ -18,13 +18,14 @@
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<c:if test="${EmailResponse != null}">
 	<script>
-		if ($('#EmailResponse') != null){
-			alert($('#EmailResponse'));
-	
-		}
+		var sent = "${EmailResponse}";
+		
+		alert(sent);	
+		
+		
 	</script>
 	</c:if>
-	
+	<!--  ${EmailResponse }-->
 	<h1>this is the home page</h1>
 	<h1>${message}</h1>
 	<h1>Welcome, ${user.getUsername()}</h1>

@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import customTools.DbPosts;
 import customTools.DbUser;
 import model.Bhpost;
+import model.Bhuser;
 
 /**
  * Servlet implementation class CreateUser
@@ -34,59 +36,45 @@ public class CreateUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String action = request.getParameter("action");
-		String nextPage = "/error.jsp";//someplace to go if things don't work
-		String message = "";
-		HttpSession session = request.getSession();
-		
+//		
+//	
+		String email = request.getParameter("nEmail");
+		String username = request.getParameter("nName");
+		String password = request.getParameter("nPassword");
+	
+		String nextPage = "/login.jsp";
+		Bhuser check = DbUser.getUserByEmail(email);
 		List<Bhpost> posts = null;
-		
-		
+		HttpSession session = request.getSession();
+		String message = "";
 		//did they click the logout link?
 		//first... check that the action variable contains something
 		//then the code below will determine if they clicked logout and kill the session
 		//before sending the user back to the login page
-		if(!action.isEmpty()||!(action==null)){
-		    if (request.getParameter("action").toString().equals("logout")){
-		        //Go back to login.jsp. 
-		        nextPage = "/login.jsp";
-		        response.sendRedirect(request.getContextPath() + nextPage);
-		        return;//return here exits the method and prevents an error
-		    }else{
-		        nextPage = "/home.jsp";
-		    }
+	
+
+		
+		if(check != null){
+			
+			String exist = "This email is already registered";
+			request.setAttribute("Exists",exist );
+			getServletContext().getRequestDispatcher(nextPage).forward(request,response);
+	        return;//return here exits the method and prevents an error
 		}
-
-		posts = DbPosts.bhPost();
-		session.setAttribute("posts",posts);
 		
-		//putting a blank message just ensures I have a blank message.Since the message is set in the session
-		//it could still exist as the user navigates between pages so at the top of each page I should endure
-		//the message attribute contains nothing. Alternatively, I could just remove it if it exists.
-		session.setAttribute("message",message);
-
-		//Existential question: Does the user exist? Are they really who they say they are???
-		//And while you're at it... what is the meaning of life?
-		if (DbUser.isValidUser(email,password)){
-			//add the valid user to the session
-			session.setAttribute("user", DbUser.getUserByEmail(email));
-			nextPage = "/home.jsp";
-		}else{
-			//probably not necessary but you can clear all session variables just to be sure nobody can access them 
-			session.invalidate();
-			//they put in the wrong password or don't exist in the database
-			nextPage = "/login.jsp";
-		}
-
-		//Your work here is done. Redirect to next page as indicated by the value of the nextURL variable
-		response.sendRedirect(request.getContextPath() + nextPage);
+		Bhuser newUser = new Bhuser();
+		Date temp = new Date();
+		newUser.setJoindate(temp);
+		newUser.setMotto("Hello World");
+		newUser.setUseremail(email);
+		newUser.setUsername(username);
+		newUser.setUserpassword(password);
+		DbUser.insert(newUser);
+		String worked = "User Created! Please login now!";
+		request.setAttribute("Exists",worked );
 		
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		getServletContext().getRequestDispatcher(nextPage).forward(request,response);
+//	
 	}
 
 	/**

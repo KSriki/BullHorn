@@ -36,7 +36,8 @@ public class LoginServlet extends HttpServlet {
 		String nextPage = "/error.jsp";//someplace to go if things don't work
 		String message = "";
 		HttpSession session = request.getSession();
-		
+
+		//session.setAttribute("EmailResponse",null);
 		List<Bhpost> posts = null;
 		
 		

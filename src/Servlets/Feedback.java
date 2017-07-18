@@ -120,7 +120,9 @@ public class Feedback extends HttpServlet {
 				}
 			}
 	     
-			sess.setAttribute("EmailResponse", "Thank you for your feedback! \nExpect a Response within the next few days!");
+			String temp = "Thank you for your feedback! Expect a Response within the next few days!";
+			request.setAttribute("EmailResponse", temp);
+			
 			getServletContext().getRequestDispatcher(nextURL).forward(request,response);
 	       	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

@@ -26,7 +26,8 @@ public class Home extends HttpServlet {
 		HttpSession session = request.getSession();
 		//get user out of session
 		Bhuser u = (Bhuser) session.getAttribute("user");
-		
+
+		//session.setAttribute("EmailResponse",null);
 		String username = u.getUsername();
 		//make sure a user is in the session. If they don't exist then go back to the login page.
 		if (session.getAttribute("user")==null){

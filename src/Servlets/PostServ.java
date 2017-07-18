@@ -55,6 +55,8 @@ public class PostServ extends HttpServlet {
 		//get user out of session. If they don't exist then send them back to the login page.
 		//kill the session while you're at it.
 		HttpSession session = request.getSession();
+
+		session.setAttribute("EmailResponse",null);
 		if (session.getAttribute("user")==null){
 			//http://stackoverflow.com/questions/13638446/checking-servlet-session-attribute-value-in-jsp-file
 			nextURL = "/login.jsp";
