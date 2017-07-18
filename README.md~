@@ -1,10 +1,6 @@
 # Redirect from Servlet Example
 This example illustrates many of the concepts of a Java EE application. We still have not connected to the database yet but we'll do that soon. To account for the database I've created classes such as `DbUser` which will be modified to connect to the database. DbUser will not go away... it will be the class that calls the database.
 
-Uses FakeSMTP server for email handling of complaints/feedback page.
-
-No current encryption of passwords. To be added at a later date (have the code ready)
-
 ### Use the following command to clone this project from GitHub
 
 ```console

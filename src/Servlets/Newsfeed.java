@@ -66,9 +66,11 @@ public class Newsfeed extends HttpServlet {
 		
 		//get posts based on parameters; if no parameters then get all posts
 		List<Bhpost> posts = null;
+		//userid not empty, get specific user posts
 		if (request.getParameter("userid")!=null){
 			filterByUserID = Integer.parseInt(request.getParameter("userid"));
 			posts = DbPosts.postsofUser(filterByUserID);
+			//get posts with search text similiar to this
 		}else if (request.getParameter("searchtext")!=null){
 			searchtext = request.getParameter("searchtext").toString();
 			posts = DbPosts.searchPosts(searchtext);

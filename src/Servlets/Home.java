@@ -26,6 +26,7 @@ public class Home extends HttpServlet {
 		HttpSession session = request.getSession();
 		//get user out of session
 		Bhuser u = (Bhuser) session.getAttribute("user");
+		
 		String username = u.getUsername();
 		//make sure a user is in the session. If they don't exist then go back to the login page.
 		if (session.getAttribute("user")==null){
@@ -34,6 +35,8 @@ public class Home extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + nextURL);
 			return;//return prevents an error; Don't believe me? Take it out.
 		}
+		
+		
 		//create a message to send to the home page
 		String message = "Welcome, " + username;
 		

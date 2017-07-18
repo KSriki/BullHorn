@@ -6,8 +6,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<jsp:include page="include.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Bullhorn: Newsfeed</title>
 </head>
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
@@ -17,7 +18,8 @@ I've hard coded three posts here to show you what this might look like.
 The newsfeed servlet would be called to query the database and populate the
 posts into an arraylist which would be displayed in this JSP
 -->
-<table class="table table-bordered">
+<div class="container">
+<table class="table table-bordered table-stiped table-hover">
     <thead>
         <tr><th>User</th><th>Post</th><th>Date</th></tr>
     </thead>
@@ -30,6 +32,8 @@ posts into an arraylist which would be displayed in this JSP
     </c:forEach>
     </tbody>
     </table>
-    
+ </div>
+ 
+<jsp:include page="footer.jsp" />
 </body>
 </html>

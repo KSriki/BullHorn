@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Bullhorn: Feedback</title>
 </head>
 <body>
+<jsp:include page="include.jsp" />
 <jsp:include page="navbar.jsp"></jsp:include>
 <h1>this is the feedback page</h1>
-<form action="" method="post">
+<form action="Feedback" method="post">
   <input type="radio" name="subject" value="Question" checked> Question<br>
   <input type="radio" name="subject" value="Complaint"> Complaint<br>
   <input type="radio" name="subject" value="Comment"> Comment<br><br>
@@ -17,5 +18,6 @@
   <input type="submit" value="Send Feedback">
 </form>
 
+<jsp:include page="footer.jsp" />
 </body>
 </html>
