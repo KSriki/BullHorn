@@ -43,9 +43,11 @@ public class UpdateUser extends HttpServlet {
 	
 		String nextPage = "/home.jsp";
 		Bhuser check = DbUser.getUserByEmail(email);
-		List<Bhpost> posts = null;
+		
 		HttpSession session = request.getSession();
-		String message = "";
+	
+		String exist = "Failed to update profile!";
+	
 		//did they click the logout link?
 		//first... check that the action variable contains something
 		//then the code below will determine if they clicked logout and kill the session
@@ -54,16 +56,19 @@ public class UpdateUser extends HttpServlet {
 
 		
 		if(check == null){
-			
+			request.setAttribute("Exists",exist );
 			//set update fail alert
 			getServletContext().getRequestDispatcher(nextPage).forward(request,response);
 	        return;//return here exits the method and prevents an error
 		}
-	
+		exist = "Update Succeeded!";
+		request.setAttribute("Exists",exist );
+		//session.setAttribute("editProfile", true);
 		check.setUseremail(email);
 		check.setUsername(username);
+		check.setMotto(motto);
 		DbUser.update(check);
-		nextPage="/profile.jsp";
+		nextPage="/home.jsp";
 		getServletContext().getRequestDispatcher(nextPage).forward(request,response);
 		
 	}

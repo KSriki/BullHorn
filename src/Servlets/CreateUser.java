@@ -40,7 +40,7 @@ public class CreateUser extends HttpServlet {
 //	
 		String email = request.getParameter("nEmail");
 		String username = request.getParameter("nName");
-		String password = request.getParameter("nPassword");
+		String password = request.getParameter("nPass");
 	
 		String nextPage = "/login.jsp";
 		Bhuser check = DbUser.getUserByEmail(email);
@@ -60,13 +60,14 @@ public class CreateUser extends HttpServlet {
 			request.setAttribute("Exists",exist );
 			getServletContext().getRequestDispatcher(nextPage).forward(request,response);
 	        return;//return here exits the method and prevents an error
-		}
+		} 
 		
 		Bhuser newUser = new Bhuser();
 		Date temp = new Date();
 		newUser.setJoindate(temp);
-		newUser.setMotto("Hello World");
+	//	newUser.setMotto("Hello World");
 		newUser.setUseremail(email);
+		//newUser.setBhuserid(4);
 		newUser.setUsername(username);
 		newUser.setUserpassword(password);
 		DbUser.insert(newUser);

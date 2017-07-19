@@ -30,19 +30,19 @@ public class DbUser {
 	public static void insert(Bhuser bhUser) {
 		EntityManager em = DbUtil.getEmFactory().createEntityManager();
 		EntityTransaction trans = em.getTransaction();
-		//System.out.println("DbBullhorn: begin transaction");
+		System.out.println("DbBullhorn: begin transaction");
 		try {
 			trans.begin();
 			em.persist(bhUser);
 			em.flush();
-			//System.out.println("DbBullhorn: commit transaction");
+			System.out.println("DbBullhorn: commit transaction");
 			trans.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("DbBullhorn: rollback transaction");
+			System.out.println("DbBullhorn: rollback transaction");
 			trans.rollback();
 		} finally {
-			//System.out.println("DbBullhorn: close em");
+			System.out.println("DbBullhorn: close em");
 			em.close();
 		}
 	}
@@ -77,6 +77,7 @@ public class DbUser {
 		try {
 			trans.begin();
 			em.merge(bhUser);
+			em.flush();
 			trans.commit();
 		} catch (Exception e) {
 			System.out.println(e);

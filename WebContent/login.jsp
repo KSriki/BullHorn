@@ -38,14 +38,15 @@
 		<div class="col-md-6">
 			<h2> Create User </h2>
 			<form action="CreateUser" method="post" onsubmit="return validate(this);">
-				Username: <input type="text" name="nName" id="nName" value=""> <br />
+				Username: <input type="text" name="nName" id="nName" value="john"> <br />
 				Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email"
-					name="nEmail" id="nEmail" value=""><br />
+					name="nEmail" id="nEmail" value="john@smith.com"><br />
 				Password:&nbsp;<input type="password" name="nPass" id="nPass"
-					value=""><br />
+					value="password"><br />
 				Confirm Password:&nbsp;<input type="password" name="confirm" id="confirm"
-					value=""><br /> 
-					
+					value="password"><br /> 
+					<input type="hidden" name="action"
+					value="login"> 
 					 <input type="submit" value="Create">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					 <input type="reset" value="Reset">
 			</form>

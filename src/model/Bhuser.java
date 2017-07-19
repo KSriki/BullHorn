@@ -14,7 +14,7 @@ import java.util.Date;
 public class Bhuser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long bhuserid;
 
 	@Temporal(TemporalType.DATE)

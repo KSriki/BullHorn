@@ -18,7 +18,17 @@
 	<c:if test="${editProfile==null}">
 		<h1>the session doesn't exist</h1>
 	</c:if>
-
+	
+	<c:if test="${Exists != null}">
+	<script>
+		var exist = "${Exists}";
+		
+		alert(exist);	
+		
+		
+	</script>
+	</c:if>
+	
 	<c:choose>
 		<c:when test="${editProfile==false}">
 			<table border="1">
@@ -41,17 +51,17 @@
 				<table border="1">
 					<tr>
 						<td>Name:</td>
-						<td><input type="text" name="username"
+						<td><input type="text" name="username" id="username"
 							value="<c:out value="${username}"/>"></td>
 					</tr>
 					<tr>
 						<td>Email:</td>
-						<td><input type="text" name="useremail" 
+						<td><input type="text" name="useremail" id="useremail"
 						    value="<c:out value="${useremail}"/>"></td>
 					</tr>
 					<tr>
 						<td>Motto:</td>
-						<td><input type="text" name="usermotto"
+						<td><input type="text" name="usermotto" id="usermotto"
 						     value="<c:out value="${usermotto}"/>"></td>
 					</tr>
 				</table>
